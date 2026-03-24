@@ -85,3 +85,14 @@ next_day_of_year = next_date.dayofyear
 next_temp_pred = model.predict(pd.DataFrame({'DayOfYear': [next_day_of_year]}))[0]
 
 st.success(f"Predicted Temperature for {next_date.strftime('%Y-%m-%d')} is **{next_temp_pred:.2f} °C**")
+
+if __name__ == '__main__':
+    import os
+    import sys
+    import subprocess
+    
+    # Check if we are already running under streamlit
+    if not os.environ.get("STREAMLIT_RUNNING"):
+        os.environ["STREAMLIT_RUNNING"] = "1"
+        # Run streamlit using the current Python executable
+        subprocess.run([sys.executable, "-m", "streamlit", "run", os.path.abspath(__file__)])
